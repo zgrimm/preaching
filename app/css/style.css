@@ -1,0 +1,87 @@
+.view-animate.ng-enter {
+	transition: 0.5s linear all;
+	opacity:0;
+}
+
+.view-animate.ng-enter.ng-enter-active {
+	opacity: 1;
+}
+
+.navbar-default{
+	background-color: #6AB3B2;
+	border-color: #6AB3B2;
+	box-shadow: 1px 1px 4px black;
+
+}
+
+.navbar-default.normal{
+	height:100px;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.5s;
+
+}
+.navbar-default.shrink{
+	height:65px;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.navbar-default.normal .navbar-brand img{
+	height:80px;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.5s;
+
+}
+.navbar-default.shrink .navbar-brand img{
+	height:50px;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.z-nav a{
+	color: white !important;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+  font-size: 20px;
+  -webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.z-nav a:hover{
+	color: black !important;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px white;
+  -webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.5s;
+  
+}
+
+.top-spacing{
+	height:150px;
+}
+.top-spacing-post{
+	height:100px;
+}
+
+
+
+/*  MOBILE  */
+@media (max-width: 768px){
+.navbar-default.normal{}
+.navbar-default.shrink{}
+.navbar-default.normal .navbar-brand img{max-width:;}
+.navbar-default.shrink .navbar-brand img{}
+
+}

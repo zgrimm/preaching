@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<title>Preaching To The Animals</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<!-- jQuey-->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!-- Angular and its dependencies  -->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-route.js"></script>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-resource.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-animate.js"></script> 
+
+ 	<!-- My js dependant on Angular -->
+ 	<script src="app/app.js"></script>
+ 	<script src="app/routes/routes.js"></script>
+ 	<script src="app/services/services.js"></script>
+ 	<script src="app/controllers/controllers.js"></script>
+ 	<script src="app/directives/directives.js"></script>
+
+
+
+
+ 	<!-- CSS  -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="app/css/style.css" rel="stylesheet">
+
+	
+	<!-- INfinite scroll & bootstrap js -->
+ 	<script src="app/directives/ngInfiniteScroll.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$(window).scroll(function() {
+			if($(document).scrollTop() > 150) {
+				$('.navbar').addClass('shrink');
+			}
+			else {
+				$('.navbar').removeClass('shrink'); 
+			}
+		});
+	});
+  </script>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top normal">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#/"><img src="app/imgs/Preach.png" /></a>
+			</div>
+			<div class="collapse navbar-collapse" >
+				<ul class="nav navbar-nav navbar-right">
+					<li class="z-nav"><a href="#/">Home</a></li>
+					<li class="z-nav"><a href="#/1">Cats</a></li>
+					<li class="z-nav"><a href="#/2">Elephants</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+
+<div>
+
+	<div class="container view-animate" ng-view >
+	</div>
+	
+</div>
+
+
+
+</body>
+</html>
