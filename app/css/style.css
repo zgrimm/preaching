@@ -6,6 +6,21 @@
 .view-animate.ng-enter.ng-enter-active {
 	opacity: 1;
 }
+.view-animate.ng-enter.z {
+	transition: 1.5s linear all;
+	opacity:0;
+}
+
+.homebox{
+	background-color:blue;
+	transition: 0.5s linear all;
+}
+
+.homebox:hover{
+	background-color:red;
+	transition: 0.5s linear all;
+}
+
 
 .navbar-default{
 	background-color: #6AB3B2;

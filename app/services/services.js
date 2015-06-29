@@ -19,14 +19,14 @@ app.service('postData', ['$resource', function($resource) {
 
 app.service('homePagePosts',['$resource', function($resource) {
 
-	this.GetHomeData = function(postId) {
+	this.GetHomeData = function(postslug) {
 
 		var homeApi = $resource("api.php?p=:postId", {
 			callback: "JSON_CALLBACK",
 			postId: '@id'
 		});
 
-		var result = homeApi.get({postId: postId});
+		var result = homeApi.get({postId: postslug});
 
 		return result;
 	}

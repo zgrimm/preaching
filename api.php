@@ -16,7 +16,7 @@ if(isset($_GET['q'])) {
     			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // ? why is this neccasarry?
     			//get the row where the id mathces val of q
 
-    			$sql = $conn->prepare("SELECT * FROM posts WHERE ID = :q");
+    			$sql = $conn->prepare("SELECT * FROM posts WHERE Url = :q");
     			$sql->bindValue(':q', $q, PDO::PARAM_STR);
 
     			$sql->execute();
@@ -52,8 +52,11 @@ if(isset($_GET['q'])) {
 
                 $sql->execute();
 
-                $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-                echo json_encode($result);
+                $result = $sql->fetchAll(PDO::FETCH_OBJ);
+
+                
+
+                echo json_encode($result, JSON_FORCE_OBJECT);
                 
                 
             }

@@ -1,14 +1,29 @@
+
 app.controller('homeController', ['$scope','$routeParams', 'homePagePosts', function($scope, $routeParams, homePagePosts) {
 
-	$scope.currentId = '1';
+	$scope.currentId = 1;
 
+	$scope.posts = [];
+	
 	$scope.updateHome = function() {
 		$scope.GetMoPosts = homePagePosts.GetHomeData($scope.currentId);
 
 		$scope.GetMoPosts.$promise.then(function() {
-			$scope.currentId = (parseInt($scope.currentId) + 2).toString();
+			
+			for (var i =0 ; i < 3; i++) {
+
+				if(!$scope.GetMoPosts[i]){ return; }
+
+				$scope.posts.push($scope.GetMoPosts[i]);
+				
+				$scope.posts[$scope.currentId - 1].imgUrl = "http://localhost/preaching/app/imgs/" + $scope.posts[$scope.currentId - 1].imgUrl;
+				
+				$scope.currentId++;
+			}	
+
+
+			
 			console.log($scope.currentId);
-			console.log($scope.GetMoPosts);
 		});
 	}
 
@@ -18,10 +33,10 @@ app.controller('homeController', ['$scope','$routeParams', 'homePagePosts', func
 
 app.controller('postController', ['$scope', '$routeParams', '$sce', 'postData', 'dataHolder', function($scope, $routeParams, $sce, postData, dataHolder){
 
-	$scope.postid = $routeParams.post;
+	$scope.postslug = $routeParams.post;
 
 
-	$scope.postInfo = postData.GetPostData($scope.postid);
+	$scope.postInfo = postData.GetPostData($scope.postslug);
 
 	$scope.postInfo.$promise.then(function(){
 	

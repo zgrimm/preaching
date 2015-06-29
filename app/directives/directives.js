@@ -11,6 +11,15 @@ app.directive('ytVid',function() {
 		}
 	};
 
-
-
 });
+
+app.directive('homeBox', function() {
+	return {
+		restrict:'E',
+		templateUrl: 'app/directives/homebox.html',
+		replace:true,
+		scope: {
+			postInfoObject: '='
+		}
+	}
+})
