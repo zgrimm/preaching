@@ -1,16 +1,27 @@
 <div class="top-spacing"></div>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-8">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/i9pJ-JHYayc" frameborder="0" allowfullscreen></iframe>
+		<h1 class="text-center" style="font-family: 'Gloria Hallelujah', cursive;margin-bottom:32px;text-shadow:1px 1px 3px #6AB3B2;">They Have So Much To Teach Us!</h1>
+		<div class="col-sm-8 home-vid" >
+			<div style="background-color:red;">
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe id="ytplayer" type="text/html" width="720" height="405"
+src="https://www.youtube.com/embed/i9pJ-JHYayc?controls=0&fs=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
+frameborder="0" allowfullscreen></iframe>
+				</div>
 			</div>
 		</div>
+
+
+
+
 		<div class="col-sm-4">
-			<div style="height:315px; width:100%;background-color:green;">
+			<div style="height:315px; width:100%;background-color:green;margin-bottom:54px;">	
 			</div>
+			<img src="app/imgs/facebook.jpg" alt="" class="img-responsive text-center;"/>
 		</div>
 	</div>
+	<div class="row"><h1 class="text-center" style="font-family: 'Gloria Hallelujah', cursive;margin-bottom:40px;margin-top:40px;text-shadow:1px 1px 3px #6AB3B2;">The Most Amazing Animal Videos Online!</h1></div>
 	<div class="row">
 		<div infinite-scroll="updateHome()" infinite-scroll-distance="3">
 			<div ng-repeat="post in posts">

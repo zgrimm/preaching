@@ -1,11 +1,9 @@
-<div class="col-sm-4 text-center homebox" style="background-image:url('{{postInfoObject.imgUrl}}');background-size:cover"; >
-	<h5>{{postInfoObject.Title}}</h5>
-	<!-- <a href="#{{postInfoObject.Url}}"><img ng-src="{{postInfoObject.imgUrl}}" class="img-responsive"/></a> -->
-	<div >
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
+<div class="col-sm-4 text-center home-box-container" style="background-image:url('{{postInfoObject.imgUrl}}');background-size:cover;">
+	<div class="bg-image">
+		<img class="img-responsive" src="app/imgs/transparent.png" alt=""/>
 	</div>
+	<a href="#{{postInfoObject.Url}}"><div class="top-layer">
+		<div style="font-family: 'Gloria Hallelujah', cursive;margin-top:15%;">{{postInfoObject.Title}}</div>
+	</div></a>
+
 </div>

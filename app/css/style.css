@@ -84,12 +84,79 @@
 }
 
 .top-spacing{
-	height:150px;
+	height:110px;
 }
 .top-spacing-post{
 	height:100px;
 }
 
+/*HOME VIDEO BOX*/
+.home-vid{
+	  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  margin: auto;
+  background-image: url('../imgs/monitor.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 17px 14px 46px 14px;
+  
+}
+
+
+
+/*HOME BOXES*/
+.home-box-container{
+	position:relative;
+	top:0;
+	left:0;
+	z-index:1;
+	margin:auto;
+	padding:0;
+
+}
+
+.home-box-container .bg-image{
+	position:relative;
+	top:0;
+	left:0;
+	z-index:2;
+	margin:0;
+	width:100%;
+	height:0;
+	padding-top:69%;
+}
+
+.home-box-container div.top-layer{
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:3;
+	margin:0;
+	width:100%;
+	height:100%;
+	font-size:0px;
+	color:black;
+	text-shadow:1px 1px 2px white;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.5s;
+
+	
+	
+}
+.home-box-container div.top-layer:hover{
+	
+	background-color:rgba(106, 179, 178, 0.63);
+	font-size:40px;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.5s;
+	
+}
 
 
 /*  MOBILE  */
