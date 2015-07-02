@@ -9,7 +9,6 @@ app.service('postData', ['$resource', function($resource) {
 
 		var result = postApi.get({postId: postId});
 
-		console.log(result);
 		return result;
 		
 		 
@@ -32,6 +31,33 @@ app.service('homePagePosts',['$resource', function($resource) {
 	}
 }]);
 
+app.service('ratingService', ['$resource', function($resource) {
+
+	// updates DB with new vote POST
+	this.addVote = function(newRatingVal) {
+		
+	};
+
+	//Grab the updated data: GET
+	this.newData = function(postslug) {
+
+		var postApi = $resource("api.php?q=:postId",{
+			callback: "JSON_CALLBACK",
+			postId: '@id'
+		});
+
+		var result = postApi.get({postId: postslug});
+		
+
+		return result;
+	};
+
+
+}]);
+
+
+
+//not in use, dummy dataholder to pass data between controllers
 app.service('dataHolder',[function(){
 
 	this.data = {};

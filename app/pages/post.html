@@ -16,7 +16,37 @@
 				<img src="app/imgs/red.png" alt="" class="img-responsive">
 			</div>
 			<div class="col-sm-6">
-				<img src="app/imgs/redred.png" alt="" class="img-responsive">
+				<!-- <img src="app/imgs/redred.png" alt="" class="img-responsive"> -->
+				<!--  directive for rating problems passing form data in directive
+				<post-rating post-info-object="postInfo"></post-rating> -->
+				<div ng-if="rating.hasRated == false" class="rating-box">
+					<h3 style="font-family: 'Gloria Hallelujah', cursive;">Rate This Video!</h3>
+					<div>
+					<div class="rate-paw" ng-click="rating.castVote('1')"></div>
+					<div class="rate-paw"ng-click="rating.castVote('2')"></div>
+					<div class="rate-paw" ng-click="rating.castVote('3')"></div>
+					<div class="rate-paw" ng-click="rating.castVote('4')"></div>
+					<div class="rate-paw" ng-click="rating.castVote('5')"></div>
+					</div>
+
+
+					<form style="visibility:hidden;">
+						<input type="radio" value="0" ng-model="rating.currentRating">0
+						<input type="radio" value="1" ng-model="rating.currentRating">1
+						<input type="radio" value="2" ng-model="rating.currentRating">2
+						<input type="radio" value="3" ng-model="rating.currentRating">3
+						<input type="radio" value="4" ng-model="rating.currentRating">4
+						<input type="radio" value="5" ng-model="rating.currentRating">5
+					</form>
+				</div>
+				<div ng-if="rating.hasRated == true" class="rating-box">
+					<h3 style="font-family: 'Gloria Hallelujah', cursive;">Overall Rating:</h3>
+						<div>
+							{{rating.overallRating}}
+							<div class="rate-overlay"><h4>{{rating.overallRating}}withsometext</h4></div>
+						</div>
+					</div>
+
 			</div>
 			<div class="col-2m-12">
 				Other vds

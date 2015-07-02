@@ -22,4 +22,17 @@ app.directive('homeBox', function() {
 			postInfoObject: '='
 		}
 	}
-})
+});
+
+
+// // cant pass form data properly through directive
+// app.directive('postRating', function() {
+// 	return {
+// 		restrict: 'E',
+// 		templateUrl: 'app/directives/rate.html',
+// 		replace: true,
+// 		scope: {
+// 			postInfoObject: '='
+// 		}
+// 	}
+// })

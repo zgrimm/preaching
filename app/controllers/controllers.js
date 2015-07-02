@@ -20,10 +20,6 @@ app.controller('homeController', ['$scope','$routeParams', 'homePagePosts', func
 				
 				$scope.currentId++;
 			}	
-
-
-			
-			console.log($scope.currentId);
 		});
 	}
 
@@ -31,10 +27,9 @@ app.controller('homeController', ['$scope','$routeParams', 'homePagePosts', func
 }]);
 
 
-app.controller('postController', ['$scope', '$routeParams', '$sce', 'postData', 'dataHolder', function($scope, $routeParams, $sce, postData, dataHolder){
+app.controller('postController', ['$scope', '$routeParams', '$sce', 'postData', 'ratingService', function($scope, $routeParams, $sce, postData, ratingService){
 
 	$scope.postslug = $routeParams.post;
-
 
 	$scope.postInfo = postData.GetPostData($scope.postslug);
 
@@ -42,13 +37,49 @@ app.controller('postController', ['$scope', '$routeParams', '$sce', 'postData', 
 	
 		$scope.postInfo.ytUrl = 'http://www.youtube.com/embed/' +  $scope.postInfo.YtId; 
 
-		$scope.postInfo.trustedYoutube = $sce.trustAsResourceUrl($scope.postInfo.ytUrl);
+		$scope.postInfo.trustedYoutube = $sce.trustAsResourceUrl($scope.postInfo.ytUrl);	
 
-		console.log($scope.postInfo.ytUrl);
+		$scope.postInfo.rating = +($scope.postInfo.votePoints) / +($scope.postInfo.numVotes);	
+		
+	});
+	
+
+	$scope.rating = {
+		currentRating: '0',
+		hasRated: false,
+		castVote: function(vote) {
+			$scope.rating.currentRating = vote;
+		},
+		overallRating: 4.2
+		
+	};
+
+	$scope.$watch('rating.currentRating', function() {
+		
+		if($scope.rating.currentRating !== '0'){
+			//post the new data to the db via a service funcion
+			//ratingService.addVote($scope.rating.currentRating);
+			//get the latest data from db and calculate overallRating to update
+			$scope.rating.newData = ratingService.newData($routeParams.post);
+			console.log($scope.rating.newData);
+
+			 $scope.rating.newData.$promise.then(function(){
+
+			 	var numvotes = $scope.rating.newData.numVotes;
+			 	var votepoints = $scope.rating.newData.votePoints;
+
+			 	$scope.rating.overallRating = +(votepoints) / +(numvotes);
+
+
+			
+				$scope.rating.hasRated = true;
+			});
+		}
 	});
 
 	
 
-	console.log($scope.postInfo);
+
+	
 
 }]);
