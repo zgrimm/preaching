@@ -33,8 +33,15 @@ app.service('homePagePosts',['$resource', function($resource) {
 
 app.service('ratingService', ['$resource', function($resource) {
 
-	// updates DB with new vote POST
-	this.addVote = function(newRatingVal) {
+	//updates DB with new vote POST
+	this.addVote = function(newRatingVal,postslug) {
+		var postApi = $resource("rating.php");
+		var data = {
+			"r": newRatingVal,
+			"postslug": postslug
+		};
+		postApi.save(data);
+
 		
 	};
 

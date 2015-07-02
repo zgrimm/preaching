@@ -58,20 +58,18 @@ app.controller('postController', ['$scope', '$routeParams', '$sce', 'postData', 
 		
 		if($scope.rating.currentRating !== '0'){
 			//post the new data to the db via a service funcion
-			//ratingService.addVote($scope.rating.currentRating);
+			ratingService.addVote($scope.rating.currentRating, $routeParams.post);
+			
 			//get the latest data from db and calculate overallRating to update
 			$scope.rating.newData = ratingService.newData($routeParams.post);
-			console.log($scope.rating.newData);
 
-			 $scope.rating.newData.$promise.then(function(){
+			 $scope.rating.newData.$promise.then(function() {
 
 			 	var numvotes = $scope.rating.newData.numVotes;
 			 	var votepoints = $scope.rating.newData.votePoints;
 
 			 	$scope.rating.overallRating = +(votepoints) / +(numvotes);
 
-
-			
 				$scope.rating.hasRated = true;
 			});
 		}
