@@ -22,12 +22,16 @@
 				<div ng-if="rating.hasRated == false" class="rating-box">
 					<h3 style="font-family: 'Gloria Hallelujah', cursive;">Rate This Video!</h3>
 					<div>
-					<div class="rate-paw" ng-click="rating.castVote('1')"></div>
-					<div class="rate-paw"ng-click="rating.castVote('2')"></div>
-					<div class="rate-paw" ng-click="rating.castVote('3')"></div>
-					<div class="rate-paw" ng-click="rating.castVote('4')"></div>
-					<div class="rate-paw" ng-click="rating.castVote('5')"></div>
+					<div class="rate-paw {{ rating.hover[1] }} col-sm-2" ng-click="rating.castVote(1)" ng-mouseleave="rating.hoverOut()" ng-mouseover="rating.hoveringOn(1)"></div>
+					<div class="rate-paw {{ rating.hover[2] }} col-sm-2" ng-click="rating.castVote(2)" ng-mouseleave="rating.hoverOut()" ng-mouseover="rating.hoveringOn(2)"></div>
+					<div class="rate-paw {{ rating.hover[3] }} col-sm-2" ng-click="rating.castVote(3)" ng-mouseleave="rating.hoverOut()" ng-mouseover="rating.hoveringOn(3)"></div>
+					<div class="rate-paw {{ rating.hover[4] }} col-sm-2" ng-click="rating.castVote(4)" ng-mouseleave="rating.hoverOut()" ng-mouseover="rating.hoveringOn(4)"></div>
+					<div class="rate-paw {{ rating.hover[5] }} col-sm-2" ng-click="rating.castVote(5)" ng-mouseleave="rating.hoverOut()" ng-mouseover="rating.hoveringOn(5)"></div>
+
 					</div>
+					<script>
+						
+					</script>
 
 
 					<form style="visibility:hidden;">
@@ -40,11 +44,22 @@
 					</form>
 				</div>
 				<div ng-if="rating.hasRated == true" class="rating-box">
-					<h3 style="font-family: 'Gloria Hallelujah', cursive;">Overall Rating:</h3>
+					<h3 style="font-family: 'Gloria Hallelujah', cursive;">Thanks! New Overall Rating:</h3>
 						<div>
-							{{rating.overallRating}}
-							<div class="rate-overlay"><h4>{{rating.overallRating}}withsometext</h4></div>
+							
+							<div style="position:relative; max-width:250px">
+								<div class="rate-paw-done col-sm-2"></div>
+								<div class="rate-paw-done col-sm-2"></div>
+								<div class="rate-paw-done col-sm-2"></div>
+								<div class="rate-paw-done col-sm-2"></div>
+								<div class="rate-paw-done col-sm-2"></div>
+								<div class="rate-overlay" style="left:{{(rating.overallRating / 5) * 100}}%;width:{{100 - ((rating.overallRating / 5)) * 100}}%">
+
+								</div>
+							</div>	
+					
 						</div>
+						<div class="text-center"><h4 style="font-size:20px;font-weight:bold;text-shadow:1px 1px 1px rgb(255, 252, 0);margin-top:25px;">{{rating.overallRating | number:2}} / 5</h4></div>	
 					</div>
 
 			</div>

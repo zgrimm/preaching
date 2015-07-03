@@ -27,27 +27,41 @@ div.rate-paw{
 	width:20%;
 	max-width:50px;
 	margin:auto;
-	background-size:cover;
+	background-size:contain;
+	background-repeat: no-repeat;
 	background-image: url('../imgs/paw.jpg');
 	height:51px;
 	float:left;
 	transition: 0.5s linear all;
 }
 
-div.rate-paw:hover{
+div.rate-paw-done{
+	width:20%;
+	max-width:50px;
+	margin:auto;
+	background-size:contain;
+	background-repeat: no-repeat;
+	background-image: url('../imgs/paw2.png');
+	height:51px;
+	float:left;
+	transition: 0.5s linear all;
+}
+
+div.rate-paw.hover{
 	background-image: url('../imgs/paw2.png');
 	transition: 0.5s linear all;
 	
 }
 
 .rate-overlay{
-	position:relative;
+	position:absolute;
 	left:0;
 	top:0;
 	z-index:3;
-	width:100%;
+	max-width:100%;
+	overflow:hidden;
 	height:51px;
-	background-color:rgba(255, 255, 255, 0.69);
+	background-color:rgba(255, 255, 255, 0.80);
 }
 
 

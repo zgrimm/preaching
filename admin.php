@@ -2,6 +2,7 @@
 $username = "admin";
 $password = "GracieFighter36$$";
 $nonsense = "chunknastywithacherryontop";
+define('Security', TRUE);
 
 if (isset($_COOKIE['PrivatePageLogin'])) {
    if ($_COOKIE['PrivatePageLogin'] == md5($password.$nonsense)) {
@@ -39,11 +40,11 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
              <label>Url Slug </label><input type="text" name="url" id="url" value="<?php echo $result[0]["Url"];  ?>" /></br/></br/>
              <label>Youtube ID </label><input type="text" name="ytid" id="ytid" value="<?php echo $result[0]["YtId"];  ?>" /></br/></br/>
              <label>Description </label><input type="text" name="desc" id="desc" value="<?php echo $result[0]["Description"];  ?>" /></br/></br/>
-            <label>Other Vid 1 </label><input type="text" name="ov1" id="ov1" value="<?php echo $result[0]["Vid1"];  ?>" /></br/></br/>
+             <label>Other Vid 1 </label><input type="text" name="ov1" id="ov1" value="<?php echo $result[0]["Vid1"];  ?>" /></br/></br/>
              <label>Other Vid 2  </label><input type="text" name="ov2" id="ov2" value="<?php echo $result[0]["Vid2"];  ?>" /></br/></br/>
              <label>Other Vid 3  </label><input type="text" name="ov3" id="ov3" value="<?php echo $result[0]["Vid3"];  ?>" /></br/></br/>
              <label>Post Image Url  </label><input type="text" name="imgUrl" id="imgUrl" value="<?php echo $result[0]["imgUrl"];  ?>" /></br/></br/>
-              <input type="submit" id="submit" value="Update Post"/>
+             <input type="submit" id="submit" value="Update Post"/>
           </form>
            <h2><a href="adminall.php"> See All Posts</a></h2>
 
@@ -51,7 +52,45 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
 
     	   else if(isset($_GET['q']) && $_GET['q'] == 'addpost') {
     		
-    		
+    		$target_dir = 'app/imgs/';
+        $target_file = $target_dir.basename($_FILES['imgUrl']['name']);
+        $uploadOk = 1;
+        $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+        if(isset($_POST['submit'])) { 
+          
+            $check = getimagesize($_FILES['imgUrl']["tmp_name"]);
+          
+            if($check !== false) {
+          
+             echo "File is an image - " . $check['mime'] . ".";
+              $uploadOk = 1;
+            
+            } else {
+            
+            echo "Aint even an image player.";
+            $uploadOk = 0;
+          }
+
+          if(file_exists($target_file)) {
+            echo "file already exists, rename";
+            $uploadOk = 0;
+          }
+
+          if($uploadOk == 0) {
+            echo "something went wrong";
+          } else {
+            if(move_uploaded_file($_FILES["imgUrl"]["tmp_name"], $target_file)) {
+              echo "success!";
+            } else {
+              echo "fuced up at the end";
+            }
+          }
+
+
+        }
+
+
     		$servername = 'localhost';
     		$username = "root";
     		$password = '';
@@ -62,7 +101,7 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
     		$ov1 = (string)$_POST['ov1'];
     		$ov2 = (string)$_POST['ov2'];
     		$ov3 = (string)$_POST['ov3'];
-        $imgUrl = (string)$_POST['imgUrl'];
+        $imgUrl = (string)$_FILES["imgUrl"]["tmp_name"];
 
     		//update table after successful conection
     		try {
@@ -94,17 +133,18 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
     		$conn = null;
     		//reload page ?>
          <h1> Add A New Post </h1>
-             <form action="<?php echo $_SERVER['PHP_SELF']; ?>?q=addpost" method="post">
+            <?php include('form.php'); ?>
+            <!--  <form action="<?php echo $_SERVER['PHP_SELF']; ?>?q=addpost" method="post">
                <label>Title </label><input type="text" name="title" id="title" /></br/></br>
-               <label>Url Slug </label><input type="text" name="url" id="url" /></br/></br/>
-               <label>Youtube ID </label><input type="text" name="ytid" id="ytid" /></br/></br/>
-               <label>Description </label><input type="text" name="desc" id="desc" /></br/></br/>
-               <label>Other Vid 1 </label><input type="text" name="ov1" id="ov1" /></br/></br/>
-               <label>Other Vid 2  </label><input type="text" name="ov2" id="ov2" /></br/></br/>
-                <label>Other Vid 3  </label><input type="text" name="ov3" id="ov3" /></br/></br/>
-                <label>Post Image Url  </label><input type="text" name="imgUrl" id="imgUrl" /></br/></br/>
-                <input type="submit" id="submit" value="Add Post"/>
-             </form>
+                 <label>Url Slug     </label><input type="text" name="url" id="url" /></br/></br/>
+                    <label>Youtube ID   </label><input type="text" name="ytid" id="ytid" /></br/></br/>
+                 <label>Description  </label><input type="text" name="desc" id="desc" /></br/></br/>
+                 <label>Other Vid 1  </label><input type="text" name="ov1" id="ov1" /></br/></br/>
+                 <label>Other Vid 2  </label><input type="text" name="ov2" id="ov2" /></br/></br/>
+                 <label>Other Vid 3  </label><input type="text" name="ov3" id="ov3" /></br/></br/>
+                 <label>Post Image Url  </label><input type="text" name="imgUrl" id="imgUrl" /></br/></br/>
+                 <input type="submit" id="submit" value="Add Post"/>
+                 </form> -->
              <h2><a href="adminall.php"> See All Posts</h2>
              <?php
     	 exit;
@@ -154,37 +194,17 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
         $conn = null;
         ?>
               <h1> Add A New Post </h1>
-             <form action="<?php echo $_SERVER['PHP_SELF']; ?>?q=addpost" method="post">
-               <label>Title </label><input type="text" name="title" id="title" /></br/></br>
-               <label>Url Slug </label><input type="text" name="url" id="url" /></br/></br/>
-               <label>Youtube ID </label><input type="text" name="ytid" id="ytid" /></br/></br/>
-               <label>Description </label><input type="text" name="desc" id="desc" /></br/></br/>
-               <label>Other Vid 1 </label><input type="text" name="ov1" id="ov1" /></br/></br/>
-               <label>Other Vid 2  </label><input type="text" name="ov2" id="ov2" /></br/></br/>
-                <label>Other Vid 3  </label><input type="text" name="ov3" id="ov3" /></br/></br/>
-                <label>Post Image Url  </label><input type="text" name="imgUrl" id="imgUrl" /></br/></br/>
-                <input type="submit" id="submit" value="Add Post"/>
-             </form>
+              <?php include('form.php'); ?>
+            
              <h2><a href="adminall.php"> See All Posts</h2>
-
-
 
 <?php
       exit;
     } else {
       ?>
        <h1> Add A New Post </h1>
-             <form action="<?php echo $_SERVER['PHP_SELF']; ?>?q=addpost" method="post">
-               <label>Title </label><input type="text" name="title" id="title" /></br/></br>
-               <label>Url Slug </label><input type="text" name="url" id="url" /></br/></br/>
-               <label>Youtube ID </label><input type="text" name="ytid" id="ytid" /></br/></br/>
-               <label>Description </label><input type="text" name="desc" id="desc" /></br/></br/>
-               <label>Other Vid 1 </label><input type="text" name="ov1" id="ov1" /></br/></br/>
-               <label>Other Vid 2  </label><input type="text" name="ov2" id="ov2" /></br/></br/>
-                <label>Other Vid 3  </label><input type="text" name="ov3" id="ov3" /></br/></br/>
-                <label>Post Image Url  </label><input type="text" name="imgUrl" id="imgUrl" /></br/></br/>
-                <input type="submit" id="submit" value="Add Post"/>
-             </form>
+       <?php include('form.php'); ?>
+             
              <h2><a href="adminall.php"> See All Posts</h2>
              <?php
     }

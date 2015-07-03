@@ -49,8 +49,30 @@ app.controller('postController', ['$scope', '$routeParams', '$sce', 'postData', 
 		hasRated: false,
 		castVote: function(vote) {
 			$scope.rating.currentRating = vote;
+			$scope.rating.hover[vote] = '';
 		},
-		overallRating: 4.2
+		overallRating: 4.2,
+		hover: {
+			1: '',
+			2: '',
+			3: '',
+			4: '',
+			5: ''
+		},
+		hoveringOn: function(rating) {
+			for(var i = rating; i > 0; i--) {
+				$scope.rating.hover[i] = 'hover';
+			}
+		},
+		hoverOut: function() {
+			for(var i = 5; i > 0; i--){
+				console.log($scope.rating.hover[i]);
+				$scope.rating.hover[i] = '';
+				console.log($scope.rating.hover[i]);
+			}
+		}
+
+
 		
 	};
 
