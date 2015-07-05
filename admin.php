@@ -51,15 +51,19 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
        <?php exit;}
 
     	   else if(isset($_GET['q']) && $_GET['q'] == 'addpost') {
-    		
+    	
     		$target_dir = 'app/imgs/';
+        echo "target_dir:" . $target_dir . '<br/>';
         $target_file = $target_dir.basename($_FILES['imgUrl']['name']);
+        echo "target_file:" . $target_file . '<br/>';
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+        echo "imageFileType:" . $imageFileType . '<br/>';
 
-        if(isset($_POST['submit'])) { 
+        if(isset($_FILES['imgUrl']['name'])) { 
           
             $check = getimagesize($_FILES['imgUrl']["tmp_name"]);
+            echo 'check, image size:' . $check . '<br/>';
           
             if($check !== false) {
           
@@ -89,7 +93,9 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
 
 
         }
-
+        else {
+          echo "prolen";
+        }
 
     		$servername = 'localhost';
     		$username = "root";
@@ -101,14 +107,14 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
     		$ov1 = (string)$_POST['ov1'];
     		$ov2 = (string)$_POST['ov2'];
     		$ov3 = (string)$_POST['ov3'];
-        $imgUrl = (string)$_FILES["imgUrl"]["tmp_name"];
+        $imgUrl = (string)$_FILES["imgUrl"]["name"];
 
     		//update table after successful conection
     		try {
     			$conn = new PDO("mysql:host=$servername;dbname=preach", $username, $password);
     			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    			$sql = $conn->prepare("INSERT INTO posts (Title, Url, YtId, Description, Vid1, Vid2, Vid3, imgUrl) VALUES (:title, :url, :ytid, :descr, :ov1, :ov2, :ov3, :imgUrl)");
+    			$sql = $conn->prepare("INSERT INTO posts (Title, Url, YtId, Description, Vid1, Vid2, Vid3, imgUrl, numVotes, votePoints) VALUES (:title, :url, :ytid, :descr, :ov1, :ov2, :ov3, :imgUrl, 0, 0)");
 
     			$sql->bindValue(':title', $title, PDO::PARAM_STR);
     			$sql->bindValue(':url', $url, PDO::PARAM_STR);
@@ -134,17 +140,7 @@ if (isset($_COOKIE['PrivatePageLogin'])) {
     		//reload page ?>
          <h1> Add A New Post </h1>
             <?php include('form.php'); ?>
-            <!--  <form action="<?php echo $_SERVER['PHP_SELF']; ?>?q=addpost" method="post">
-               <label>Title </label><input type="text" name="title" id="title" /></br/></br>
-                 <label>Url Slug     </label><input type="text" name="url" id="url" /></br/></br/>
-                    <label>Youtube ID   </label><input type="text" name="ytid" id="ytid" /></br/></br/>
-                 <label>Description  </label><input type="text" name="desc" id="desc" /></br/></br/>
-                 <label>Other Vid 1  </label><input type="text" name="ov1" id="ov1" /></br/></br/>
-                 <label>Other Vid 2  </label><input type="text" name="ov2" id="ov2" /></br/></br/>
-                 <label>Other Vid 3  </label><input type="text" name="ov3" id="ov3" /></br/></br/>
-                 <label>Post Image Url  </label><input type="text" name="imgUrl" id="imgUrl" /></br/></br/>
-                 <input type="submit" id="submit" value="Add Post"/>
-                 </form> -->
+           
              <h2><a href="adminall.php"> See All Posts</h2>
              <?php
     	 exit;

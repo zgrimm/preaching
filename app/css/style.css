@@ -135,8 +135,12 @@ div.rate-paw.hover{
 	-moz-transition: 0.5s;
 	-ms-transition: 0.5s;
 	transition: 0.5s;
-  
+  }
+
+.navbar-default .navbar-collapse {
+	border:none;
 }
+
 
 .top-spacing{
 	height:110px;
@@ -218,7 +222,20 @@ div.rate-paw.hover{
 @media (max-width: 768px){
 .navbar-default.normal{}
 .navbar-default.shrink{}
-.navbar-default.normal .navbar-brand img{max-width:;}
-.navbar-default.shrink .navbar-brand img{}
+.navbar-default.normal .navbar-brand {max-width:75%;height:auto;margin-right:5px;}
+.navbar-default.normal .navbar-brand img{max-width:100%;height:auto;margin-right:5px;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.8s;
+	}
+
+.navbar-default.shrink .navbar-brand img{max-height:50px;width:auto;
+-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-ms-transition: 0.5s;
+	transition: 0.8s;
+	
+}
 
 }
